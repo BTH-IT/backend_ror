@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Daily Weather Forecast</title>
+  </head>
+  <body>
+    <h1>Daily Weather Forecast</h1>
+    <p>Here is your daily weather forecast for <%= @location %>:</p>
+    <!-- Render weather forecast data -->
+    <p><%= @weather_forecast['current']['temp_c'] %>°C</p>
+    <p><%= @weather_forecast['current']['condition']['text'] %></p>
+    <!-- Include additional weather information as needed -->
+  </body>
+</html>

@@ -1,0 +1,7 @@
+services:
+  - name: web
+    env: docker
+    startCommand: ["bundle", "exec", "rails", "server", "-p", "8080"]
+  - name: worker
+    env: docker
+    startCommand: ["bundle", "exec", "sidekiq"]
