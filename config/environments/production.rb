@@ -99,4 +99,6 @@ Rails.application.configure do
     authentication:       'plain',
     enable_starttls_auto: true
   }
+
+  config.secret_key_base = Rails.application.credentials.secret_key_base
 end
