@@ -1,5 +1,7 @@
 require "active_support/core_ext/integer/time"
 
+ENV['WEATHER_API_KEY'] = 'fe659b2d9f2747149b223918240904'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -100,5 +102,6 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
-  config.secret_key_base = Rails.application.credentials.secret_key_base
+  config.secret_key_base = Rails.application.credentials.production[:secret_key_base]
+
 end
