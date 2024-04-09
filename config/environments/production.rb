@@ -102,6 +102,4 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
-  config.secret_key_base = Rails.application.credentials.production[:secret_key_base]
-
 end
