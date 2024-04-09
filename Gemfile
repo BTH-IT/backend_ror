@@ -18,6 +18,9 @@ gem 'sidekiq-cron'
 # Use HTTParty
 gem 'httparty'
 
+# Use Rack-CORS
+gem 'rack-cors'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
