@@ -26,7 +26,10 @@ class Api::V1::WeathersController < ApplicationController
     response = HTTParty.get("https://api.weatherapi.com/v1/forecast.json?key=#{api_key}&q=#{q}&days=14&tp=24")
     
     if response.success?
-      render json: response.parsed_response
+      if parsed_response['forecast'] && parsed_response['forecast']['forecastday'].is_a?(Array)
+        parsed_response['forecast']['forecastday'].shift
+      end
+      render json: parsed_response
     else
       render json: { error: "Failed to fetch weather forecast data" }, status: :bad_request
     end
