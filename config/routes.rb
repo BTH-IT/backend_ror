@@ -6,9 +6,9 @@ Rails.application.routes.draw do
       post 'subscribe', to: 'subscriptions#subscribe'
       delete 'unsubscribe', to: 'subscriptions#unsubscribe'
       get 'confirm', to: 'subscriptions#confirm'
-      resources :weathers, only: [:index] do
+      resources :weathers, only: [:index, :create, :update, :destroy] do
         collection do
-          get 'forecast'
+          get 'forecast' # Adds a custom route for /api/v1/weathers/forecast
         end
     end
   end
