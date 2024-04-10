@@ -13,11 +13,11 @@ class Api::V1::SubscriptionsController < ApplicationController
         if subscription
           render json: { message: "Subscribed successfully" }
         else
-          render json: { error: "Subscription failed" }, status: :unprocessable_entity
+          render json: { error: "Subscription failed" }, status: :bad_request
         end
       end
     else
-      render json: { error: "Email and location cannot be blank" }, status: :unprocessable_entity
+      render json: { error: "Email and location cannot be blank" }, status: :bad_request
     end
   end
 
@@ -27,10 +27,10 @@ class Api::V1::SubscriptionsController < ApplicationController
       if WeatherSubscription.unsubscribe(email)
         render json: { message: "Unsubscribed successfully" }
       else
-        render json: { error: "Unsubscription failed" }, status: :unprocessable_entity
+        render json: { error: "Unsubscription failed" }, status: :bad_request
       end
     else
-      render json: { error: "Email cannot be blank" }, status: :unprocessable_entity
+      render json: { error: "Email cannot be blank" }, status: :bad_request
     end
   end
 
@@ -41,10 +41,10 @@ class Api::V1::SubscriptionsController < ApplicationController
       if WeatherSubscription.confirm(email, token)
         render json: { message: "Subscription confirmed successfully" }
       else
-        render json: { error: "Invalid confirmation token or email" }, status: :unprocessable_entity
+        render json: { error: "Invalid confirmation token or email" }, status: :bad_request
       end
     else
-      render json: { error: "Email and token cannot be blank" }, status: :unprocessable_entity
+      render json: { error: "Email and token cannot be blank" }, status: :bad_request
     end
   end
 end
