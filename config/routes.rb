@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         collection do
           get 'forecast' # Adds a custom route for /api/v1/weathers/forecast
         end
+      end
     end
   end
 
@@ -19,8 +20,10 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Mount Sidekiq web interface for monitoring
-  mount Sidekiq::Web => '/sidekiq'
+  # Mount Sidekiq web interface for monitoring only for admin users
+  constraints lambda { |request| request.env['warden'].authenticate? && request.env['warden'].user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   # Defines the root path route ("/")
   # root "posts#index"
