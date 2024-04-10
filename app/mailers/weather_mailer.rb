@@ -11,6 +11,12 @@ class WeatherMailer < ApplicationMailer
     mail(to: @user_email, subject: 'Unsubscription Email')
   end
 
+  def confirmation_instructions(subscription, confirmation_token)
+    @subscription = subscription
+    @confirmation_token = confirmation_token
+    mail(to: @subscription.email, subject: 'Confirm your weather subscription')
+  end
+
   def daily_forecast_email(email, location)
     @user_email = email
     @location = location
