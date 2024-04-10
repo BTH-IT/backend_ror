@@ -27,7 +27,7 @@ class Api::V1::SubscriptionsController < ApplicationController
     end
   end
 
-  def confirm_subscription
+  def confirm
     email = params[:email]
     token = params[:token]
     if email.present? && token.present?

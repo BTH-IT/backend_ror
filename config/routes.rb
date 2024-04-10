@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'subscribe', to: 'subscriptions#subscribe'
       delete 'unsubscribe', to: 'subscriptions#unsubscribe'
+      get 'confirm', to: 'subscriptions#confirm'
       resources :weathers, only: [:index, :create, :update, :destroy]
     end
   end
