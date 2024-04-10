@@ -6,7 +6,10 @@ Rails.application.routes.draw do
       post 'subscribe', to: 'subscriptions#subscribe'
       delete 'unsubscribe', to: 'subscriptions#unsubscribe'
       get 'confirm', to: 'subscriptions#confirm'
-      resources :weathers, only: [:index, :create, :update, :destroy]
+      resources :weathers, only: [:index] do
+        collection do
+          get 'forecast'
+        end
     end
   end
 
