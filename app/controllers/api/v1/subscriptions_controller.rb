@@ -24,16 +24,21 @@ class Api::V1::SubscriptionsController < ApplicationController
   def unsubscribe
     email = params[:email]
     if email.present?
-      if WeatherSubscription.unsubscribe(email)
-        render json: { message: "Unsubscribed successfully" }
+      existing_subscription = WeatherSubscription.find_by(email: email)
+      if existing_subscription
+        if existing_subscription.destroy
+          render json: { message: "Unsubscribed successfully" }
+        else
+          render json: { error: "Unsubscription failed" }, status: :internal_server_error
+        end
       else
-        render json: { error: "Unsubscription failed" }, status: :bad_request
+        render json: { error: "Subscription not found for #{email}" }, status: :not_found
       end
     else
       render json: { error: "Email cannot be blank" }, status: :bad_request
     end
   end
-
+  
   def confirm
     email = params[:email]
     token = params[:token]
